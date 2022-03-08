@@ -1,18 +1,19 @@
-# ExMs
+# ExUnitConversion
 
-`ExMs` is a small simple package for converting an interval into milliseconds.
-Taking in an integer and a time unit measurement, `ExMs` will return the result in milliseconds.
+`ExUnitConversion` is a small simple package for simple conversions. `ExUnitConversion` can do `time_conversion` which will
+take in an integer and a unit and do the conversion
 
-The available time unit measurements are `[:second, :minute, :hour, :day, :week]`.
+
+The available time unit measurements are `[:milliseconds, :seconds, :minutes, :hours, :days, :weeks, years]`.
 
 ## Usage
 
 ```elixir
-  iex> ExMs.convert(1, :second)
+  iex> ExUnitConversion.to_ms(1, :seconds)
   1_000
 
-  iex> ExMs.convert(3, :hour)
-  10_800_000
+  iex> ExUnitConversion.to_weeks(3, :hours)
+   0.017_857_142_857_142_856
 ```
 
 
@@ -21,7 +22,7 @@ The available time unit measurements are `[:second, :minute, :hour, :day, :week]
 ```elixir
 def deps do
   [
-    {:ex_ms, "~> 0.1.0"}
+    {:ex_unit_conversion, "~> 0.1.0"}
   ]
 end
 ```

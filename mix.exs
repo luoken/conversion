@@ -1,11 +1,11 @@
-defmodule ExMs.MixProject do
+defmodule ExUnitConversion.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/luoken/ex_ms"
+  @source_url "https://github.com/luoken/ex_unit_conversion"
 
   def project do
     [
-      app: :ex_ms,
+      app: :ex_unit_conversion,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
@@ -32,7 +32,7 @@ defmodule ExMs.MixProject do
     [
       {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
-      {:excoveralls, "~> 0.10", only: :test},
+      {:excoveralls, "~> 0.10", only: :test}
     ]
   end
 
