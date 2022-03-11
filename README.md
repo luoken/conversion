@@ -9,11 +9,14 @@ The available time unit measurements are `[:milliseconds, :seconds, :minutes, :h
 ## Usage
 
 ```elixir
-  iex> Conversion.to_ms(1, :milliseconds, :seconds)
+  iex> Conversion.convert(1, :milliseconds, :seconds)
   1_000
 
-  iex> Conversion.to_weeks(3, :seconds, :hours)
+  iex> Conversion.convert(3, :seconds, :hours)
   10_800
+
+  iex> Conversion.convert(32, :fahrenheit, :kelvin)
+  273.15
 ```
 
 
