@@ -12,7 +12,7 @@ defmodule Conversion.TimeConversionTest do
     end
 
     test "ms to hour" do
-    assert 21_600_000 = TimeConversion.convert(6, :milliseconds, :hours)
+      assert 21_600_000 = TimeConversion.convert(6, :milliseconds, :hours)
     end
 
     test "ms to day" do
