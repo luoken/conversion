@@ -1,6 +1,6 @@
-# ExUnitConversion
+# Conversion
 
-`ExUnitConversion` is a small simple package for simple conversions. `ExUnitConversion` can do `time_conversion` which will
+`Conversion` is a small simple package for simple conversions. `Conversion` can do `time_conversion` which will
 take in an integer and a unit and do the conversion
 
 
@@ -9,11 +9,11 @@ The available time unit measurements are `[:milliseconds, :seconds, :minutes, :h
 ## Usage
 
 ```elixir
-  iex> ExUnitConversion.to_ms(1, :seconds)
+  iex> Conversion.to_ms(1, :milliseconds, :seconds)
   1_000
 
-  iex> ExUnitConversion.to_weeks(3, :hours)
-   0.017_857_142_857_142_856
+  iex> Conversion.to_weeks(3, :seconds, :hours)
+  10_800
 ```
 
 
@@ -22,7 +22,7 @@ The available time unit measurements are `[:milliseconds, :seconds, :minutes, :h
 ```elixir
 def deps do
   [
-    {:ex_unit_conversion, "~> 0.1.0"}
+    {:conversion, "~> 0.1.0"}
   ]
 end
 ```

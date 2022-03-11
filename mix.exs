@@ -1,11 +1,11 @@
-defmodule ExUnitConversion.MixProject do
+defmodule Conversion.MixProject do
   use Mix.Project
 
-  @source_url "https://github.com/luoken/ex_unit_conversion"
+  @source_url "https://github.com/luoken/conversion"
 
   def project do
     [
-      app: :ex_unit_conversion,
+      app: :conversion,
       version: "0.1.0",
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
