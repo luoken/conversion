@@ -1,6 +1,6 @@
 defmodule Conversion.Time do
   @moduledoc """
-  This module is in charge of converting a time unit measurement to milliseconds
+  This module is in charge of converting from one time unit to another, e.g. seconds to minutes
   """
 
   @typedoc """
