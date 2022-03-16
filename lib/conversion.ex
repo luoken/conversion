@@ -1,9 +1,9 @@
 defmodule Conversion do
   @moduledoc """
-  Small Elixir library for converting one time unit to another.
+  Elixir library for converting one unit of measurement to another.
   """
 
-  defdelegate convert(interval, unit, unit), to: Conversion.TimeConversion
+  defdelegate convert(interval, to, from), to: Conversion.Time
 
-  defdelegate convert(temp, to, from), to: Conversion.TemperatureConversion
+  defdelegate convert(temp, to, from), to: Conversion.Temperature
 end

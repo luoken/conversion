@@ -1,4 +1,4 @@
-defmodule Conversion.TimeConversion do
+defmodule Conversion.Time do
   @moduledoc """
   This module is in charge of converting a time unit measurement to milliseconds
   """
@@ -18,10 +18,10 @@ defmodule Conversion.TimeConversion do
 
   ## Examples
 
-      iex> Conversion.convert(1, :milliseconds, :seconds)
+      iex> Conversion.convert(1, :seconds, :milliseconds)
       1_000
 
-      iex> Conversion.convert(1, :seconds, :hours)
+      iex> Conversion.convert(1, :hours, :seconds)
       3_600
   """
   @spec convert(interval :: integer(), unit(), unit()) :: float()
