@@ -1,10 +1,11 @@
 # Conversion
 
-`Conversion` is a small simple package for simple conversions. `Conversion` can do `time_conversion` which will
-take in an integer and a unit and do the conversion
+`Conversion` is a package for converting one unit of measurement to another. `Conversion` can do `time` or `temperature` conversions which will take in an integer or float and a from and to unit and output the conversion result.
 
 
 The available time unit measurements are `[:milliseconds, :seconds, :minutes, :hours, :days, :weeks, years]`.
+
+Other available unit measurements are `[:kelvin, :celius, :fahrenheit]`
 
 ## Usage
 
