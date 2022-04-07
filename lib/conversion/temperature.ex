@@ -7,28 +7,13 @@ defmodule Conversion.Temperature do
 
   @type unit :: :celcius | :fahrenheit | :kelvin
 
-  @spec convert(float(), unit(), unit()) :: float()
-  def convert(temp, :celcius, :fahrenheit) do
-    temp * (9 / 5) + 32
-  end
+  @spec convert(measurement :: float(), unit(), unit()) :: float()
+  def convert(measurement, :celcius, :fahrenheit), do: measurement * (9 / 5) + 32
+  def convert(measurement, :celcius, :kelvin), do: measurement + @kelvin_const
 
-  def convert(temp, :celcius, :kelvin) do
-    temp + @kelvin_const
-  end
+  def convert(measurement, :fahrenheit, :celcius), do: (measurement - 32) * (5 / 9)
+  def convert(measurement, :fahrenheit, :kelvin), do: (measurement - 32) * (5 / 9) + @kelvin_const
 
-  def convert(temp, :fahrenheit, :celcius) do
-    (temp - 32) * (5 / 9)
-  end
-
-  def convert(temp, :fahrenheit, :kelvin) do
-    (temp - 32) * (5 / 9) + @kelvin_const
-  end
-
-  def convert(temp, :kelvin, :celcius) do
-    temp - @kelvin_const
-  end
-
-  def convert(temp, :kelvin, :fahrenheit) do
-    (temp - @kelvin_const) * (9 / 5) + 32
-  end
+  def convert(measurement, :kelvin, :celcius), do: measurement - @kelvin_const
+  def convert(measurement, :kelvin, :fahrenheit), do: (measurement - @kelvin_const) * (9 / 5) + 32
 end
