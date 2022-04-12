@@ -10,6 +10,7 @@ defmodule Conversion.MixProject do
       elixir: "~> 1.13",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
+      description: "Conversion app for converting from one metric to another",
       package: package(),
       homepage_url: @source_url,
       test_coverage: [tool: ExCoveralls],
@@ -30,8 +31,8 @@ defmodule Conversion.MixProject do
 
   defp deps do
     [
-      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:credo, "~> 1.6", only: [:dev, :test], runtime: false},
+      {:ex_doc, "~> 0.27", only: :dev, runtime: false},
       {:excoveralls, "~> 0.10", only: :test}
     ]
   end
