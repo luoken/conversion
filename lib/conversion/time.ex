@@ -1,22 +1,20 @@
 defmodule Conversion.Time do
   @moduledoc """
-  This module is in charge of converting from one time unit to another, e.g. seconds to minutes
+  This module is in charge of converting from one time value to another, e.g. seconds to minutes
   """
 
   @year_const 365.25
 
   @typedoc """
-  - `:interval` - Integer representing a time value
-  - `:unit` - Atom representation of time unit. e.g. :seconds, :minutes, :hours, :days, :weeks, :years
+  - `:value` - Atom representation of time measurement. e.g. :seconds, :minutes, :hours, :days, :weeks, :years
   """
 
-  @type unit :: :milliseconds | :seconds | :minutes | :hours | :days | :weeks | :years
+  @type value :: :milliseconds | :seconds | :minutes | :hours | :days | :weeks | :years
 
   @doc """
-  from -> to
-  Givien a time interval along with two units of time measurement e.g. :milliseconds, :hours.
-  Convert from one unit to the other. The initial unit is the from case and the latter is the
-  unit we are converting to
+  Given a time `time_value` along with two measurements e.g. :milliseconds, :hours.
+  Convert from one measurement to the other. The initial unit is the from case and the latter is the
+  unit we are converting to.
 
   ## Examples
 
@@ -26,120 +24,164 @@ defmodule Conversion.Time do
       iex> Conversion.convert(1, :hours, :seconds)
       3_600
   """
-  @spec convert(interval :: integer(), unit(), unit()) :: float()
-  def convert(interval, :milliseconds, :milliseconds) when is_integer(interval), do: interval
+  @spec convert(time_value :: float(), from :: value(), to :: value()) :: float()
+  def convert(time_value, :milliseconds, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: time_value
 
-  def convert(interval, :milliseconds, :seconds) when is_integer(interval),
-    do: interval * 1000
+  def convert(time_value, :milliseconds, :seconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: time_value / 1000
 
-  def convert(interval, :milliseconds, :minutes) when is_integer(interval),
-    do: convert(interval, :milliseconds, :seconds) * 60
+  def convert(time_value, :milliseconds, :minutes)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :milliseconds, :seconds) / 60
 
-  def convert(interval, :milliseconds, :hours) when is_integer(interval),
-    do: convert(interval, :milliseconds, :minutes) * 60
+  def convert(time_value, :milliseconds, :hours)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :milliseconds, :minutes) / 60
 
-  def convert(interval, :milliseconds, :days) when is_integer(interval),
-    do: convert(interval, :milliseconds, :hours) * 24
+  def convert(time_value, :milliseconds, :days)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :milliseconds, :hours) / 24
 
-  def convert(interval, :milliseconds, :weeks) when is_integer(interval),
-    do: convert(interval, :milliseconds, :days) * 7
+  def convert(time_value, :milliseconds, :weeks)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :milliseconds, :days) / 7
 
-  def convert(interval, :milliseconds, :years) when is_integer(interval),
-    do: convert(interval, :milliseconds, :days) * @year_const
+  def convert(time_value, :milliseconds, :years)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :milliseconds, :days) / @year_const
 
-  def convert(interval, :seconds, :milliseconds), do: interval / 1000
-  def convert(interval, :seconds, :seconds) when is_integer(interval), do: interval
-  def convert(interval, :seconds, :minutes) when is_integer(interval), do: interval * 60
+  def convert(time_value, :seconds, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: time_value / 1000
 
-  def convert(interval, :seconds, :hours) when is_integer(interval),
-    do: convert(interval, :seconds, :minutes) * 60
+  def convert(time_value, :seconds, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: time_value
 
-  def convert(interval, :seconds, :days) when is_integer(interval),
-    do: convert(interval, :seconds, :hours) * 24
+  def convert(time_value, :seconds, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: time_value / 60
 
-  def convert(interval, :seconds, :weeks) when is_integer(interval),
-    do: convert(interval, :seconds, :days) * 7
+  def convert(time_value, :seconds, :hours) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :seconds, :minutes) / 60
 
-  def convert(interval, :seconds, :years) when is_integer(interval),
-    do: convert(interval, :seconds, :days) * @year_const
+  def convert(time_value, :seconds, :days) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :seconds, :hours) / 24
 
-  def convert(interval, :minutes, :milliseconds),
-    do: convert(interval, :minutes, :seconds) / 1000
+  def convert(time_value, :seconds, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :seconds, :days) / 7
 
-  def convert(interval, :minutes, :seconds) when is_integer(interval), do: interval / 60
-  def convert(interval, :minutes, :minutes) when is_integer(interval), do: interval
-  def convert(interval, :minutes, :hours) when is_integer(interval), do: interval * 60
+  def convert(time_value, :seconds, :years) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :seconds, :days) / @year_const
 
-  def convert(interval, :minutes, :days) when is_integer(interval),
-    do: convert(interval, :minutes, :hours) * 24
+  def convert(time_value, :minutes, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :minutes, :seconds) / 1000
 
-  def convert(interval, :minutes, :weeks) when is_integer(interval),
-    do: convert(interval, :minutes, :days) * 7
+  def convert(time_value, :minutes, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: time_value * 60
 
-  def convert(interval, :minutes, :years) when is_integer(interval),
-    do: convert(interval, :minutes, :days) * @year_const
+  def convert(time_value, :minutes, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: time_value
 
-  def convert(interval, :hours, :milliseconds),
-    do: convert(interval, :hours, :seconds) / 1000
+  def convert(time_value, :minutes, :hours) when is_float(time_value) or is_integer(time_value),
+    do: time_value / 60
 
-  def convert(interval, :hours, :seconds) when is_integer(interval),
-    do: convert(interval, :hours, :minutes) / 60
+  def convert(time_value, :minutes, :days) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :minutes, :hours) / 24
 
-  def convert(interval, :hours, :minutes) when is_integer(interval), do: interval / 60
-  def convert(interval, :hours, :hours) when is_integer(interval), do: interval
-  def convert(interval, :hours, :days) when is_integer(interval), do: interval * 24
+  def convert(time_value, :minutes, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :minutes, :days) / 7
 
-  def convert(interval, :hours, :weeks) when is_integer(interval),
-    do: convert(interval, :hours, :days) * 7
+  def convert(time_value, :minutes, :years) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :minutes, :days) / @year_const
 
-  def convert(interval, :hours, :years) when is_integer(interval),
-    do: convert(interval, :hours, :days) * @year_const
+  def convert(time_value, :hours, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :hours, :seconds) * 1000
 
-  def convert(interval, :days, :milliseconds),
-    do: convert(interval, :days, :seconds) / 1000
+  def convert(time_value, :hours, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :hours, :minutes) * 60
 
-  def convert(interval, :days, :seconds) when is_integer(interval),
-    do: convert(interval, :days, :minutes) / 60
+  def convert(time_value, :hours, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: time_value * 60
 
-  def convert(interval, :days, :minutes) when is_integer(interval),
-    do: convert(interval, :days, :hours) / 60
+  def convert(time_value, :hours, :hours) when is_float(time_value) or is_integer(time_value),
+    do: time_value
 
-  def convert(interval, :days, :hours) when is_integer(interval), do: interval / 24
-  def convert(interval, :days, :days) when is_integer(interval), do: interval
-  def convert(interval, :days, :weeks) when is_integer(interval), do: interval * 7
-  def convert(interval, :days, :years) when is_integer(interval), do: interval * @year_const
+  def convert(time_value, :hours, :days) when is_float(time_value) or is_integer(time_value),
+    do: time_value / 24
 
-  def convert(interval, :weeks, :milliseconds),
-    do: convert(interval, :weeks, :seconds) / 1000
+  def convert(time_value, :hours, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :hours, :days) / 7
 
-  def convert(interval, :weeks, :seconds) when is_integer(interval),
-    do: convert(interval, :weeks, :minutes) / 60
+  def convert(time_value, :hours, :years) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :hours, :days) / @year_const
 
-  def convert(interval, :weeks, :minutes) when is_integer(interval),
-    do: convert(interval, :weeks, :hours) / 60
+  def convert(time_value, :days, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :days, :seconds) * 1000
 
-  def convert(interval, :weeks, :hours) when is_integer(interval),
-    do: convert(interval, :weeks, :days) / 24
+  def convert(time_value, :days, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :days, :minutes) * 60
 
-  def convert(interval, :weeks, :days) when is_integer(interval), do: interval / 7
-  def convert(interval, :weeks, :weeks) when is_integer(interval), do: interval
-  def convert(interval, :weeks, :years) when is_integer(interval), do: interval * 51.1429
+  def convert(time_value, :days, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :days, :hours) * 60
 
-  def convert(interval, :years, :milliseconds),
-    do: convert(interval, :years, :seconds) / 1000
+  def convert(time_value, :days, :hours) when is_float(time_value) or is_integer(time_value),
+    do: time_value * 24
 
-  def convert(interval, :years, :seconds) when is_integer(interval),
-    do: convert(interval, :years, :minutes) / 60
+  def convert(time_value, :days, :days) when is_float(time_value) or is_integer(time_value),
+    do: time_value
 
-  def convert(interval, :years, :minutes) when is_integer(interval),
-    do: convert(interval, :years, :hours) / 60
+  def convert(time_value, :days, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: time_value / 7
 
-  def convert(interval, :years, :hours) when is_integer(interval),
-    do: convert(interval, :years, :days) / 24
+  def convert(time_value, :days, :years) when is_float(time_value) or is_integer(time_value),
+    do: time_value / @year_const
 
-  def convert(interval, :years, :days) when is_integer(interval),
-    do: convert(interval, :years, :weeks) / 7
+  def convert(time_value, :weeks, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :weeks, :seconds) * 1000
 
-  def convert(interval, :years, :weeks) when is_integer(interval), do: interval / 51.1429
-  def convert(interval, :years, :years) when is_integer(interval), do: interval
+  def convert(time_value, :weeks, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :weeks, :minutes) * 60
+
+  def convert(time_value, :weeks, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :weeks, :hours) * 60
+
+  def convert(time_value, :weeks, :hours) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :weeks, :days) * 24
+
+  def convert(time_value, :weeks, :days) when is_float(time_value) or is_integer(time_value),
+    do: time_value * 7
+
+  def convert(time_value, :weeks, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: time_value
+
+  def convert(time_value, :weeks, :years) when is_float(time_value) or is_integer(time_value),
+    do: time_value / 51.1429
+
+  def convert(time_value, :years, :milliseconds)
+      when is_float(time_value) or is_integer(time_value),
+      do: convert(time_value, :years, :seconds) * 1000
+
+  def convert(time_value, :years, :seconds) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :years, :minutes) * 60
+
+  def convert(time_value, :years, :minutes) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :years, :hours) * 60
+
+  def convert(time_value, :years, :hours) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :years, :days) * 24
+
+  def convert(time_value, :years, :days) when is_float(time_value) or is_integer(time_value),
+    do: convert(time_value, :years, :weeks) * 7
+
+  def convert(time_value, :years, :weeks) when is_float(time_value) or is_integer(time_value),
+    do: time_value * 51.1429
+
+  def convert(time_value, :years, :years) when is_float(time_value) or is_integer(time_value),
+    do: time_value
 end

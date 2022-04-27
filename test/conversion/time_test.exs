@@ -4,27 +4,27 @@ defmodule Conversion.TimeTest do
 
   describe "convert from milliseconds" do
     test "convert milliseconds to second" do
-      assert 2_000 = Time.convert(2, :milliseconds, :seconds)
+      assert 0.002 = Time.convert(2, :milliseconds, :seconds)
     end
 
     test "ms to minute" do
-      assert 180_000 = Time.convert(3, :milliseconds, :minutes)
+      assert 5.0e-5 = Time.convert(3, :milliseconds, :minutes)
     end
 
     test "ms to hour" do
-      assert 21_600_000 = Time.convert(6, :milliseconds, :hours)
+      assert 1.6666666666666667e-6 = Time.convert(6, :milliseconds, :hours)
     end
 
     test "ms to day" do
-      assert 172_800_000 = Time.convert(2, :milliseconds, :days)
+      assert 2.314814814814815e-8 = Time.convert(2, :milliseconds, :days)
     end
 
     test "ms to week" do
-      assert 3_024_000_000 = Time.convert(5, :milliseconds, :weeks)
+      assert 8.267195767195766e-9 = Time.convert(5, :milliseconds, :weeks)
     end
 
     test "ms to year" do
-      3.15_576e10 = Time.convert(1, :milliseconds, :years)
+      assert 3.1688087814028955e-11 = Time.convert(1, :milliseconds, :years)
     end
   end
 end
