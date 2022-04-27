@@ -1,13 +1,16 @@
 defmodule Conversion.Temperature do
   @moduledoc """
-  This module is in charge of converting between temperature units. e.g. kelvin, celcius, fahrenheit
+  This module is in charge of converting between different temperature values. e.g. kelvin, celcius, fahrenheit
   """
 
   @kelvin_const 273.15
 
-  @type unit :: :celcius | :fahrenheit | :kelvin
+  @typedoc """
+  Temperature values, e.g. celcius, kelvin
+  """
+  @type value :: :celcius | :fahrenheit | :kelvin
 
-  @spec convert(measurement :: float(), unit(), unit()) :: float()
+  @spec convert(measurement :: float(), from :: value(), to :: value()) :: float()
   def convert(measurement, :celcius, :fahrenheit), do: measurement * (9 / 5) + 32
   def convert(measurement, :celcius, :kelvin), do: measurement + @kelvin_const
 
